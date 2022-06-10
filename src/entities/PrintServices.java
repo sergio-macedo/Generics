@@ -3,13 +3,14 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrintServices {
-    private List<Integer> list = new ArrayList<>();
+public class PrintServices<Type> {
+    private List<Type> list = new ArrayList<>();
 
-    public void addValue ( Integer value) {
+    public void addValue ( Type value)
+    {
         list.add(value);
     }
-    public Integer first() {
+    public Type first() {
         if(list.isEmpty()) {
             throw new IllegalStateException("List is empty");
         }
