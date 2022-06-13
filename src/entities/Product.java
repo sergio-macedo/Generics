@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public class Product implements Comparable<Product> {
     private String name;
     private Double price;
@@ -24,13 +27,30 @@ public class Product implements Comparable<Product> {
     public void setPrice(Double price) {
         this.price = price;
     }
-    @Override
-    public String toString() {
-        return name + ", " +String.format("%.2f", price);
-    }
 
     @Override
     public int compareTo(Product other) {
-        return price.compareTo(other.getPrice());
+        return name.toUpperCase(Locale.ROOT).compareTo(other.getName().toUpperCase(Locale.ROOT));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name) && Objects.equals(price, product.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
