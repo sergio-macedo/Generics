@@ -1,13 +1,10 @@
 package course;
 
-import com.sun.nio.sctp.AbstractNotificationHandler;
-import entities.LogEntry;
+import entities.Student;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Instant;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -21,16 +18,13 @@ public class LogProgram {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
-            Set<LogEntry> set = new HashSet<>();
-            String line = br.readLine();
-            while (line != null) {
-                String[] fields = line.split(" ");
-                String username = fields[0];
-                Date moment = Date.from(Instant.parse(fields[1]));
-                set.add(new LogEntry(username, moment));
-                line = br.readLine();
+            Set<Student> set = new HashSet<>();
+            String courseCode = br.readLine();
+            while (courseCode != null) {
+                set.add(new Student(courseCode));
+                courseCode = br.readLine();
             }
-            System.out.println("total users: "  + set.size());
+            System.out.println("total students: "  + set.size());
 
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
